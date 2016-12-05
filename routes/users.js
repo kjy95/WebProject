@@ -1,6 +1,6 @@
 var express = require('express'),
     User = require('../models/User');
-var router = express.Router();
+var router = express.Router(); 
 
 function needAuth(req, res, next) {
   if (req.isAuthenticated()) {
@@ -49,7 +49,7 @@ router.get('/', needAuth, function(req, res, next) {
     res.render('users/index', {users: users});
   });
 });
-
+ 
 router.get('/new', function(req, res, next) {
   res.render('users/new', {messages: req.flash()});
 });

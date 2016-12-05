@@ -8,10 +8,10 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
 var routes = require('./routes/index');
-// var users = require('./routes/users');//user추가
+var users = require('./routes/users');//user추가
 var posts = require('./routes/posts');
 var mongoose   = require('mongoose');
-
+var routeAuth = require('./routes/auth');//auth추가
 var app = express();
 
 // view engine setup
@@ -23,7 +23,7 @@ if (app.get('env') === 'development') {
 app.locals.moment = require('moment');
 
 // mongodb connect
-// 아래 DB접속 주소는 꼭 자기 것으로 바꾸세요!
+//  DB접속 주소는
 mongoose.connect('mongodb://kjy95:1top1only@ds151127.mlab.com:51127/peace');
 mongoose.connection.on('error', console.log);
 
@@ -38,7 +38,7 @@ app.use('/bower_components',  express.static(path.join(__dirname, '/bower_compon
 app.use(methodOverride('_method', {methods: ['POST', 'GET']}));
 
 app.use('/', routes);
-// app.use('/users', users);//user추가
+app.use('/users', users);//user추가
 app.use('/posts', posts);
 
 // catch 404 and forward to error handler

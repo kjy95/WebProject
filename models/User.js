@@ -12,7 +12,7 @@ var schema = new Schema({
   toJSON: { virtuals: true},
   toObject: {virtuals: true}
 });
-
+//암호화 npm install --save bcryptjs
 schema.methods.generateHash = function(password) {
   var salt = bcrypt.genSaltSync(10);
   return bcrypt.hashSync(password, salt);
