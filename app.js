@@ -7,13 +7,19 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
+
+var configAuth = require('./config/auth');//추가
+var passport = require('passport');//추가
 var routes = require('./routes/index');
 var users = require('./routes/users');//user추가
 var posts = require('./routes/posts');
 var mongoose   = require('mongoose');
+var session = require('express-session');//추가
 var routeAuth = require('./routes/auth');//auth추가
+var passport = require('passport');//추가
 var app = express();
 
+var flash = require('connect-flash');//추가
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -23,7 +29,7 @@ if (app.get('env') === 'development') {
 app.locals.moment = require('moment');
 
 // mongodb connect
-//  DB접속 주소는
+//  DB접속 주소
 mongoose.connect('mongodb://kjy95:1top1only@ds151127.mlab.com:51127/peace');
 mongoose.connection.on('error', console.log);
 
@@ -36,6 +42,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components',  express.static(path.join(__dirname, '/bower_components')));
 app.use(methodOverride('_method', {methods: ['POST', 'GET']}));
+
+// 추가flashMessages
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: 'long-long-long-secret-string-1313513tefgwdsvbjkvasd'
+}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  res.locals.flashMessages = req.flash();
+  next();
+});
+
+configAuth(passport);
+routeAuth(app, passport);
+//
 
 app.use('/', routes);
 app.use('/users', users);//user추가

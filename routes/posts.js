@@ -54,7 +54,7 @@ router.put('/:id', function(req, res, next) {
     }
     //각 항목에 넣은값을 입력한다.
     post.email = req.body.email;
-    post.content =  req.body.content
+    post.content =  req.body.content;
     post.title =  req.body.title;
     post.password =  req.body.password;
     post.save(function(err) {
