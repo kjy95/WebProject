@@ -2,9 +2,18 @@ var express = require('express'),
     Post = require('../models/Post');
 var router = express.Router();
 
+function needAuth(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    req.flash('danger', '로그인후 이용할 수 있습니다.');
+    res.redirect('/signin');
+  }
+}
+
 
 // '/'를 받았을때 posts(이곳)에 감.
-router.get('/',  function(req, res, next) {
+router.get('/',needAuth,  function(req, res, next) {
   Post.find({}, function(err, posts) {
     if (err) {
       return next(err);
