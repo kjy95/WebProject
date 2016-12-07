@@ -1,5 +1,6 @@
 var express = require('express'),
-    Post = require('../models/Post');
+    Post = require('../models/Post'),
+    Reservation = require('../models/Reservation');;
 var router = express.Router();
 
 function needAuth(req, res, next) {
@@ -41,14 +42,18 @@ router.post('/', function(req, res, next) {
 
 //글제목 누르면 내용보여줌
 router.get('/:id', function(req, res, next) {
-Post.findById(req.params.id, function(err, post) {
-    Post.findByIdAndUpdate(req.params.id, {$inc: {read: 1}}, function(err) {
+  Post.findById(req.params.id, function(err, post) {
+    if (err) {
+      return next(err);
+    }
+    Reservation.find({post: post.id}, function(err, reservations ) {
       if (err) {
         return next(err);
       }
-      res.render('posts/show', {post: post});
-   });
- }); });
+      res.render('posts/show', {post: post, reservations: reservations});
+    });
+  });
+});
 
 ///:id/edit일대 그 값을 넘겨서 edit을 연다.
 router.get('/:id/edit', function(req, res, next) {
@@ -82,6 +87,25 @@ router.delete('/:id', function(req, res, next) {
   });
 });
 
+//reservation추가
+router.post('/:id/reservations', function(req, res, next) {
+  var reservation = new Reservation({
+    post: req.params.id,
+    email: req.body.email,
+    content: req.body.content
+  });
 
+  reservation.save(function(err) {
+    if (err) {
+      return next(err);
+    }
+    Post.findByIdAndUpdate(req.params.id, {$inc: {numComment: 1}}, function(err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/posts/' + req.params.id);
+    });
+  });
+});
 
 module.exports = router;
