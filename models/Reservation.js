@@ -14,4 +14,4 @@ var schema = new Schema({
 
 var Reservation  = mongoose.model('Reservation ', schema);
 
-module.exports = Reservation ;
+module.exports = Reservation;
