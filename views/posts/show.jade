@@ -12,25 +12,31 @@ block content
     p.well(style='white-space:pre;')= post.content
     
      hr
-  h3 예약신청 목록
-  table.table
-    tr
-      th email
-      th content
-      th time
-    each reservation in reservations
+    h3 예약신청 목록
+    table.table
       tr
-        td= reservation.email
-        td= reservation.content
-        td= moment(reservation.createdAt).format('YYYY/MM/DD')
-  
-  form.form-inline(action='/posts/' + post._id + '/reservations', method='POST')
-    .form-group
-      label.sr-only(for='email') email
-      input.form-control(name='email', placeholder='email')
-    .form-group
-      label.sr-only(for='content') content
-      input.form-control(name='content', size=50, placeholder='content')
-    button.btn.btn-info 예약신청하기
-    a.btn.btn-default(href='/posts') 목록
+        th To
+        th 신청자
+        th content
+        th time
+        th 예약 승인여부
+      each reservation in reservations
+        tr
+        if (currentUser) 
+          li
+            a(href='/users/#{currentUser._id}') 프로필
+          td #{post.email}
+          td= reservation.email
+          td= reservation.content
+          td= moment(reservation.createdAt).format('YYYY/MM/DD')
+          td= reservation.reserve  
+    form.form-inline(action='/posts/' + post._id + '/reservations', method='POST')
+      .form-group
+        label.sr-only(for='email') email
+        input.form-control(name='email', placeholder='email')
+      .form-group
+        label.sr-only(for='content') content
+        input.form-control(name='content', size=50, placeholder='content')
+      button.btn.btn-info 예약신청하기
+      a.btn.btn-default(href='/posts') 목록
 
