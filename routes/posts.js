@@ -105,15 +105,15 @@ router.post('/:id/reservations', function(req, res, next) {
       return next(err);
     }
     Post.findByIdAndUpdate(req.params.id, {$inc: {numComment: 1}}, function(err) {
-       User.findById(req.params.id, function(err, user) {
-      if (err) {
-      return next(err);
-      }
+      //  User.findById(req.params.id, function(err, user) {
+      // if (err) {
+      // return next(err);
+      // }
       if (err) {
         return next(err);
       }
-      res.redirect('/posts/' + req.params.id, {user: user});
-    });
+      res.redirect('/posts/' + req.params.id);//, {user: user}
+    // });
   });
   });
 });
