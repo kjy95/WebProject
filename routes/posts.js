@@ -95,7 +95,7 @@ router.post('/:id/reservations', function(req, res, next) {
   
   var reservation = new Reservation({
     post: req.params.id,
-    email: req.body.email,
+    Pnum: req.body.Pnum,
     content: req.body.content,
     reserve: "미승인"
   });
@@ -105,15 +105,11 @@ router.post('/:id/reservations', function(req, res, next) {
       return next(err);
     }
     Post.findByIdAndUpdate(req.params.id, {$inc: {numComment: 1}}, function(err) {
-      //  User.findById(req.params.id, function(err, user) {
-      // if (err) {
-      // return next(err);
-      // }
+     
       if (err) {
         return next(err);
       }
-      res.redirect('/posts/' + req.params.id);//, {user: user}
-    // });
+      res.redirect('/posts/' + req.params.id);
   });
   });
 });

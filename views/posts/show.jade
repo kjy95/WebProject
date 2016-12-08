@@ -18,7 +18,7 @@ block content
         th To
         th 신청자
         th 인원수
-        th content
+        th 예약 신청 날짜
         th time
         th 예약 승인여부
       each reservation in reservations
@@ -27,15 +27,15 @@ block content
             td #{post.email}
             td 
               a(href='/users/#{currentUser._id}') #{currentUser.email}
-            td= reservation.email
+            td= reservation.Pnum
             //- td= reservation.email
             td= reservation.content
             td= moment(reservation.createdAt).format('YYYY/MM/DD')
             td= reservation.reserve  
     form.form-inline(action='/posts/' + post._id + '/reservations', method='POST')
       .form-group
-        label.sr-only(for='email') email
-        input.form-control(name='email', placeholder='명수 ex. 3명')
+        label.sr-only(for='Pnum') Pnum
+        input.form-control(name='Pnum', placeholder='명수 ex. 3명')
       .form-group
         label.sr-only(for='content') content
         input.form-control(name='content', size=50, placeholder='기간 ex. 1995 04 14~2016 12 08')
