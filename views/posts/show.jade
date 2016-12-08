@@ -12,7 +12,7 @@ block content
     p.well(style='white-space:pre;')= post.content
     
      hr
-    h3 예약신청 목록
+    h3 예약신청 목록 (#{post.numComment})
     table.table
       tr
         th To
@@ -39,5 +39,25 @@ block content
         label.sr-only(for='content') content
         input.form-control(name='content', size=50, placeholder='기간 ex. 1995 04 14~2016 12 08')
       button.btn.btn-info 예약신청하기
+      a.btn.btn-default(href='/posts') 목록
+
+    h3 Comment (#{post.numComment})
+    table.table
+      tr
+        th email
+        th content
+        th time
+      each comment in comments
+        tr
+          td 
+              a(href='/users/#{currentUser._id}') #{currentUser.email}
+          td= comment.content
+          td= moment(comment.createdAt).format('YYYY/MM/DD')
+    
+    form.form-inline(action='/posts/' + post._id + '/comments', method='POST')
+      .form-group
+        label.sr-only(for='content') content
+        input.form-control(name='content', size=50, placeholder='한줄 평을 남겨주세요!')
+      button.btn.btn-info 댓글저장 
       a.btn.btn-default(href='/posts') 목록
 

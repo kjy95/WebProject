@@ -1,7 +1,8 @@
 var express = require('express'),
     Post = require('../models/Post'),
     Reservation = require('../models/Reservation'),
-    User = require('../models/User');;
+    Comment = require('../models/Comment'),
+    User = require('../models/User');
 
 var router = express.Router();
 
@@ -49,10 +50,16 @@ router.get('/:id', function(req, res, next) {
       return next(err);
     }
     Reservation.find({post: post.id}, function(err, reservations ) {
+      Comment.find({post: post.id}, function(err, comments ) {
+          if (err) {
+            return next(err);
+          }
+      
       if (err) {
         return next(err);
       }
-      res.render('posts/show', {post: post, reservations: reservations});
+      res.render('posts/show', {post: post, reservations: reservations, comments: comments});
+       });
     });
   });
 });
@@ -114,4 +121,24 @@ router.post('/:id/reservations', function(req, res, next) {
   });
 });
 
+//comment 추가
+
+router.post('/:id/comments', function(req, res, next) {
+  var comment = new Comment({
+    post: req.params.id,
+    content: req.body.content
+  });
+
+  comment.save(function(err) {
+    if (err) {
+      return next(err);
+    }
+    Post.findByIdAndUpdate(req.params.id, {$inc: {numComment: 1}}, function(err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/posts/' + req.params.id);
+    });
+  });
+});
 module.exports = router;
