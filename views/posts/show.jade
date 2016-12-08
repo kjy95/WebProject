@@ -28,7 +28,6 @@ block content
             td 
               a(href='/users/#{currentUser._id}') #{currentUser.email}
             td= reservation.Pnum
-            //- td= reservation.email
             td= reservation.content
             td= moment(reservation.createdAt).format('YYYY/MM/DD')
             td= reservation.reserve  

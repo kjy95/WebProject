@@ -10,8 +10,9 @@
         i.fa.fa-home
     #navbar.collapse.navbar-collapse
       ul.nav.navbar-nav
-       li
-          a(href='/users') 회원목록
+      if (currentUser) 
+       if currentUser.email == "rmarkd32145@naver.com" 
+        a(href='/users') 회원목록
       ul.nav.navbar-nav.navbar-right
         if (currentUser) 
           li
