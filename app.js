@@ -13,6 +13,7 @@ var passport = require('passport');//추가
 var routes = require('./routes/index');
 var users = require('./routes/users');//user추가
 var posts = require('./routes/posts');
+var tasks = require('./routes/tasks'), todos = require('./routes/todos');//todos,tasks추가
 var mongoose   = require('mongoose');
 var session = require('express-session');//추가
 var routeAuth = require('./routes/auth');//auth추가
@@ -66,7 +67,7 @@ routeAuth(app, passport);
 app.use('/', routes);
 app.use('/users', users);//user추가
 app.use('/posts', posts);
-
+app.use('/todos', todos);//todos추가
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

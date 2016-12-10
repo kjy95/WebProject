@@ -1,5 +1,5 @@
 extends ../layout
-
+//a(href='/users/#{currentUser._id}') #{currentUser.email}
 block content
   .container
     h1.page-header= post.title
@@ -23,10 +23,9 @@ block content
         th 예약 승인여부
       each reservation in reservations
         tr
-          if (currentUser) 
             td #{post.email}
-            td 
-              a(href='/users/#{currentUser._id}') #{currentUser.email}
+            td  
+              a(href='/users/#{reservation.userId}') #{reservation.email}
             td= reservation.Pnum
             td= reservation.content
             td= moment(reservation.createdAt).format('YYYY/MM/DD')
@@ -49,8 +48,7 @@ block content
         th time
       each comment in comments
         tr
-          td 
-              a(href='/users/#{currentUser._id}') #{currentUser.email}
+          td= comment.email
           td= comment.content
           td= moment(comment.createdAt).format('YYYY/MM/DD')
     

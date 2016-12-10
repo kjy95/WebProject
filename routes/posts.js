@@ -101,6 +101,8 @@ router.delete('/:id', function(req, res, next) {
 router.post('/:id/reservations', function(req, res, next) {
   
   var reservation = new Reservation({
+    userId: req.user.id,
+    email: req.user.email,
     post: req.params.id,
     Pnum: req.body.Pnum,
     content: req.body.content,
@@ -126,7 +128,8 @@ router.post('/:id/reservations', function(req, res, next) {
 router.post('/:id/comments', function(req, res, next) {
   var comment = new Comment({
     post: req.params.id,
-    content: req.body.content
+    content: req.body.content,
+    email: req.body.email
   });
 
   comment.save(function(err) {
