@@ -113,7 +113,7 @@ router.post('/:id/reservations', function(req, res, next) {
     if (err) {
       return next(err);
     }
-    Post.findByIdAndUpdate(req.params.id, {$inc: {numComment: 1}}, function(err) {
+    Post.findByIdAndUpdate(req.params.id, function(err) {
      
       if (err) {
         return next(err);
@@ -127,16 +127,17 @@ router.post('/:id/reservations', function(req, res, next) {
 
 router.post('/:id/comments', function(req, res, next) {
   var comment = new Comment({
+    userId: req.user.id,
     post: req.params.id,
     content: req.body.content,
-    email: req.body.email
+    email: req.user.email
   });
 
   comment.save(function(err) {
     if (err) {
       return next(err);
     }
-    Post.findByIdAndUpdate(req.params.id, {$inc: {numComment: 1}}, function(err) {
+    Post.findByIdAndUpdate(req.params.id, function(err) {
       if (err) {
         return next(err);
       }

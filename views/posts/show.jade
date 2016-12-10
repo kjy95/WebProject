@@ -40,7 +40,7 @@ block content
       button.btn.btn-info 예약신청하기
       a.btn.btn-default(href='/posts') 목록
 
-    h3 Comment (#{post.numComment})
+    h3 Commenty
     table.table
       tr
         th email
@@ -48,7 +48,8 @@ block content
         th time
       each comment in comments
         tr
-          td= comment.email
+          td  
+              a(href='/users/#{comment.userId}') #{comment.email}
           td= comment.content
           td= moment(comment.createdAt).format('YYYY/MM/DD')
     
