@@ -10,8 +10,27 @@ block content
       .form-group
         label(for='email') email
         input.form-control(type='email', id='email', name='email', placeholder='#{currentUser.email}', value='#{currentUser.email}')
-        label(for='password') Password
-        input.form-control(type='password', id='password', name='password', placeholder='Password')
+      .sub
+      .form-group
+        label(for='city') city
+        select.form-control(name='category')
+          option(value='서울', selected) 서울
+          option(value='경기') 경기
+          option(value='인천') 인천
+          option(value='강원') 강원
+          option(value='대전') 대전
+          option(value='세종') 세종
+          option(value='충남') 충남
+          option(value='충북') 충북
+          option(value='부산') 부산
+          option(value='울산') 울산
+          option(value='경남') 경남
+          option(value='경북') 경북
+          option(value='대구') 대구
+          option(value='광주') 광주
+          option(value='전남') 전남
+          option(value='전북') 전북
+          option(value='제주') 제주
       .form-group
         label(for='title') Title
         input.form-control(type='text', id='title', name='title', placeholder='title', value=post.title)
@@ -24,16 +43,16 @@ block content
         | 
         button.btn.btn-primary(type='submit') 완료
  
-  //-  #main.container.loading
-  //-     .row
-  //-       .col-sm-9
-  //-         include ../includes/todo-main
-  //-       .col-sm-3.side
-  //-         include ../includes/todo-side
-  //-     .spinner
-        //- .background
-        //- .foreground
-          p
-            i.fa.fa-circle-o-notch.fa-spin.fa-4x
-          p Loading...
-    script(type='text/javascript', src='/javascripts/todos.js')
+    #main.container.loading
+        .row
+          .col-sm-9
+            include ../includes/todo-main
+          .col-sm-3.side
+            include ../includes/todo-side
+        .spinner
+          .background
+          .foreground
+            p
+              i.fa.fa-circle-o-notch.fa-spin.fa-4x
+            p Loading...
+      script(type='text/javascript', src='/javascripts/todos.js')

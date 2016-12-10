@@ -9,7 +9,17 @@ var schema = new Schema({
   content: {type: String, required: true, trim: true},
   createdAt: {type: Date, default: Date.now}
 }, {
-  toJSON: { virtuals: true},
+  toJSON: { virtuals: true,
+    transform: function(task) {
+      return {
+        id: post._id.toString(),
+        city: post.city,
+        content: post.content,
+        priority: post.priority,
+        deadline: (task.deadline) ? moment(task.deadline).format('YYYY-MM-DD') : "N/A",
+        done: post.done
+      };
+    }},
   toObject: {virtuals: true}
 });
      

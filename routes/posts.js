@@ -33,7 +33,12 @@ router.get('/new', function(req, res, next) {
 
 //새Post객체생성
 router.post('/', function(req, res, next) {
-  var newpost = new Post({title: req.body.title,email: req.body.email, read:0, content: req.body.content}
+  var newpost = new Post({
+    city: req.body.city || "N/A",
+    title: req.body.title,
+    email: req.body.email, 
+    read:0, 
+    content: req.body.content}
   );
   newpost.save(function(err) {
     if (err) {
@@ -79,7 +84,7 @@ router.put('/:id', function(req, res, next) {
     post.email = req.body.email;
     post.content =  req.body.content;
     post.title =  req.body.title;
-    post.password =  req.body.password;
+    post.city = req.body.city || "N/A";
     post.save(function(err) {
       if (err) {
         return next(err);
