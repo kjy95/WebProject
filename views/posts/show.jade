@@ -9,6 +9,7 @@ block content
       span at #{moment(post.createdAt).format('YYYY-MM-DD HH:mm:ss')} 
       | 
       | (조회수 #{post.read})
+      | 도시: #{post.category}
     p.well(style='white-space:pre;')= post.content
     
      hr

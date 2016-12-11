@@ -34,7 +34,7 @@ router.get('/new', function(req, res, next) {
 //새Post객체생성
 router.post('/', function(req, res, next) {
   var newpost = new Post({
-    city: req.body.city || "N/A",
+    category: req.body.category || "N/A",
     title: req.body.title,
     email: req.body.email, 
     read:0, 
