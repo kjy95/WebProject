@@ -84,7 +84,7 @@ router.put('/:id', function(req, res, next) {
     post.email = req.body.email;
     post.content =  req.body.content;
     post.title =  req.body.title;
-    post.city = req.body.city || "N/A";
+    post.category = req.body.category || "N/A";
     post.save(function(err) {
       if (err) {
         return next(err);
