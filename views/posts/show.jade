@@ -31,6 +31,12 @@ block content
             td= reservation.content
             td= moment(reservation.createdAt).format('YYYY/MM/DD')
             td= reservation.reserve  
+            if (currentUser) 
+             if currentUser.email == post.email
+              td
+                a.btn.btn-xs.btn-default(href='/posts/#{reservation._id}/reservationYES') 승인
+                | 
+                a.btn.btn-xs.btn-default(href='/posts/#{reservation._id}/reservationNO') 거절
     form.form-inline(action='/posts/' + post._id + '/reservations', method='POST')
       .form-group
         label.sr-only(for='Pnum') Pnum
