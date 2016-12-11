@@ -94,6 +94,7 @@ router.put('/:id', function(req, res, next) {
   });
 });
 
+
 //삭제하기(findOneAndRemove를 이용한 삭제)
 router.delete('/:id', function(req, res, next) {
   Post.findOneAndRemove({_id: req.params.id}, function(err) {
@@ -125,6 +126,48 @@ router.post('/:id/reservations', function(req, res, next) {
       }
       res.redirect('/posts/' + req.params.id);
   });
+  });
+});
+
+//reservation수정
+//YES
+router.get('/:id/reservationYES', function(req, res, next) {
+  Reservation.findById(req.params.id, function(err, resrvation) {
+      if (err) {
+        return next(err);
+      }
+      resrvation.reserve = "승인";
+      resrvation.save(function(err) {
+          if (err) {
+            return next(err);
+          }
+          Post.findByIdAndUpdate(req.params.id, {$inc: {numComment: 1}},function(err) {
+              if (err) {
+                return next(err);
+              }
+               res.redirect('/posts/show');
+          });
+      }); 
+  });
+});
+//NO
+router.get('/:id/reservationNO', function(req, res, next) {
+  Reservation.findById(req.params.id, function(err, resrvation) {
+      if (err) {
+        return next(err);
+      }
+      resrvation.reserve = "거절";
+      resrvation.save(function(err) {
+          if (err) {
+            return next(err);
+          }
+          Post.findByIdAndUpdate(req.params.id, {$inc: {numComment: 1}},function(err) {
+              if (err) {
+                return next(err);
+              }
+               res.redirect('/posts/' );
+          });
+      }); 
   });
 });
 
