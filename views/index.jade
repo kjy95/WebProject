@@ -11,8 +11,32 @@ extends layout
 block content
 
  .container
-    h1.page-header AirBNB 
-    a.btn.btn-default.btn-mini(href='/posts') 숙소확인
-   
+  form(action = '/posts/category',  method='POST')
+   h1.page-header AirBNB 
+    h3 원하는 도시를 선택 하세요
+      .form-group
+      select.form-control(name='category')
+        option(value='서울', selected) 서울
+        option(value='경기') 경기
+          option(value='인천') 인천
+          option(value='강원') 강원
+          option(value='대전') 대전
+          option(value='세종') 세종
+          option(value='충남') 충남
+          option(value='충북') 충북
+          option(value='부산') 부산
+          option(value='울산') 울산
+          option(value='경남') 경남
+          option(value='경북') 경북
+          option(value='대구') 대구
+          option(value='광주') 광주
+          option(value='전남') 전남
+          option(value='전북') 전북
+          option(value='제주') 제주
+    
+    form.form-inline(action='/posts/category', method='POST')
+     div.form-actions
+       button.btn.btn-primary(type='submit') 완료
+     
  
  

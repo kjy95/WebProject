@@ -22,10 +22,20 @@ router.get('/',needAuth,  function(req, res, next) {
     if (err) {
       return next(err);
     }
-    res.render('posts/index', {posts: posts});
+       category = null
+    res.render('posts/index', {posts: posts, category:  category});
   });
 });
-
+// category 를 받았을때 .
+router.post('/category',needAuth,  function(req, res, next) {
+  Post.find({}, function(err, posts) {
+    if (err) {
+      return next(err);
+    }
+       
+    res.render('posts/index', {posts: posts, category:  req.body.category});
+  });
+});
 //글쓰기를 누르고 posts/new로 갔을 때posts/edit를 사용하기 위함이다.
 router.get('/new', function(req, res, next) { 
   res.render('posts/edit', {post:{id:0}});

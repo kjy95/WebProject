@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var schema = new Schema({
   title: {type: String, required: true, trim: true},
   category: {type: String, required: true, trim: true},
-  email: {type: String, required: true, index: true, unique: true, trim: true},
+   email: {type: String, required: true,  trim: true},
   password: {type: String},
   read: {type: Number, default: 0, required: true, trim: true},
   content: {type: String, required: true, trim: true},

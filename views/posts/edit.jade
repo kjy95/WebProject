@@ -6,7 +6,7 @@ block content
       h1.page-header 숙소 수정
     else
       h1.page-header 숙소 게시
-    form(action = (post.id) ? "/posts/#{post.id}?_method=PUT" : "/posts", method='POST')
+    form(action = (post.id) ? "/posts/#{post.id}?_method=PUT" : "/posts/category", method='POST')
       .form-group
         label(for='email') email
         input.form-control(type='email', id='email', name='email', placeholder='#{currentUser.email}', value='#{currentUser.email}')
@@ -42,17 +42,3 @@ block content
         a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
         | 
         button.btn.btn-primary(type='submit') 완료
- 
-    #main.container.loading
-        .row
-          .col-sm-9
-            include ../includes/todo-main
-          .col-sm-3.side
-            include ../includes/todo-side
-        .spinner
-          .background
-          .foreground
-            p
-              i.fa.fa-circle-o-notch.fa-spin.fa-4x
-            p Loading...
-      script(type='text/javascript', src='/javascripts/todos.js')
