@@ -79,10 +79,7 @@ router.put('/:id', function(req, res, next) {
       return res.redirect('back');
     }
 
-    if (user.password !== req.body.current_password) {
-      req.flash('danger', '현재 비밀번호가 일치하지 않습니다.');
-      return res.redirect('back');
-    }
+   
 
     user.name = req.body.name;
     user.email = req.body.email;
@@ -95,7 +92,7 @@ router.put('/:id', function(req, res, next) {
         return next(err);
       }
       req.flash('success', '사용자 정보가 변경되었습니다.');
-      res.redirect('/users');
+      res.redirect('/');
     });
   });
 });

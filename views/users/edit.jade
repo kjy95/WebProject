@@ -11,8 +11,7 @@ block content
         label(for='email') Email address
         input.form-control(type='email', id='email', name='email', placeholder='Email', value=user.email)
       .form-group
-        label(for='current_password') 현재 Password
-        input.form-control(type='password', id='current_password', name='current_password', placeholder='현재 Password')
+        label(type='password', id='current_password', name='current_password', placeholder='현재 Password', value=user.password)
       .form-group
         label(for='password') 변경할 Password
         input.form-control(type='password', id='password', name='password', placeholder='변경할 Password')
