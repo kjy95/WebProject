@@ -6,7 +6,7 @@ block content
       h1.page-header 숙소 수정
     else
       h1.page-header 숙소 게시
-    form(action = (post.id) ? "/posts/#{post.id}?_method=PUT" : "/posts/category", method='POST')
+    form(action = (post.id) ? "/posts/#{post.id}?_method=PUT" : "/posts", method='POST')
       .form-group
         label(for='email') email
         input.form-control(type='email', id='email', name='email', placeholder='#{currentUser.email}', value='#{currentUser.email}')
