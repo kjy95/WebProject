@@ -22,7 +22,7 @@ router.get('/',needAuth,  function(req, res, next) {
     if (err) {
       return next(err);
     }
-       category = null
+       var category = null;
     res.render('posts/index', {posts: posts, category:  category});
   });
 });
